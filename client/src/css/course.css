@@ -116,6 +116,7 @@
   border: none; /* Remove button border */
   cursor: pointer; /* Add cursor pointer for hover effect */
   border-radius: 5px; /* Add border radius for button */
+  background-color: rgb(165, 161, 161);
 }
 
 .deleteButton:hover,

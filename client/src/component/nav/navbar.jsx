@@ -16,7 +16,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
         <img src={MyIcon} alt="My Icon" />
       </a>

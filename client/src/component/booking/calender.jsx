@@ -100,9 +100,7 @@ const Calendar = () => {
   let timeSlots = [];
 
   let splicedSlots = [];
-  const generateTimeSlots = (times, wantedSlots) => {
-    // console.log(times);
-
+  const generateTimeSlots = () => {
     const startDate = new Date(selectedDate);
     startDate.setHours(8, 0, 0, 0);
     const endDate = new Date(selectedDate);
@@ -114,13 +112,10 @@ const Calendar = () => {
     );
 
     // while (startDate < endDate) {
-    // console.log(wantedSlots);
     for (let i = 0; i < wantedSlots.length; i++) {
-      // console.log(wantedSlots[i]);
       times.push(wantedSlots[i].split(', ')[1]);
     }
     const uniqueTimes = [...new Set(times)];
-    // console.log(wantedSlots);
 
     for (let i = 0; i < uniqueTimes.length; i++) {
       wantedSlots.push(
@@ -161,7 +156,6 @@ const Calendar = () => {
       //   return arr.includes(target);
       // };
       // const result = isStringInArray(forbiddenDates, time);
-      // console.log(time);
       // if (forbiddenDates != '') {
       timeSlots.push(
         // <button
@@ -175,10 +169,10 @@ const Calendar = () => {
         time
       );
     }
-    // console.log(whateverSlots);
-    return timeSlots;
+    return splicedSlots;
   };
 
+  let what = [];
   const fetchData = async () => {
     if (!fetchDataCalled) {
       // Check if fetchData() has not been called yet
@@ -194,10 +188,7 @@ const Calendar = () => {
             (booking) => booking.selectedDateTime
           );
 
-          // console.log(bookedDates);
-
           // var splitAlreadySelectedTimes = alreadySelectedTimes.split(',');
-          // console.log(splitAlreadySelectedTimes);
           const keysArray = timeSlots;
 
           for (let j = 0; j < keysArray.length; j++) {
@@ -214,7 +205,6 @@ const Calendar = () => {
             allDates.push(formattedTime);
           }
           allDatesUnique = [...new Set(allDates)];
-          // console.log(allDatesUnique);
           for (let i = 0; i < allDatesUnique.length; i++) {
             if (bookedDates.includes(allDatesUnique[i]) === false) {
               allowedDates = allowedDates + ' ' + allDatesUnique[i];
@@ -222,26 +212,76 @@ const Calendar = () => {
               forbiddenDates.push(allDatesUnique[i]);
             }
           }
-          // console.log(forbiddenDates);
           for (let i = 0; i < forbiddenDates.length; i++) {
             updatedForbiddenDates.push(forbiddenDates[i].split(', ')[1]);
-            // console.log(updatedForbiddenDates);
-            // console.log(timeSlotKeys);
           }
-          // console.log(updatedForbiddenDates);
           // for (let i = 0; i < updatedForbiddenDates.length; i++) {
           //   for (let j = 0; j < timeSlotKeys; j++) {
 
           // }
         });
-        console.log(generateTimeSlots(times, wantedSlots));
+        what = [...generateTimeSlots()];
+        return what;
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
   };
-  fetchData();
-  generateTimeSlots(times, wantedSlots);
+  let spliced = generateTimeSlots();
+  let fine = fetchData();
+  let myArray = [];
+  fine
+    .then((value) => {
+      myArray = value; // Store the array value in a new variable
+      const keys = myArray.map((obj) => obj.key);
+
+      // console.log(keys);
+      localStorage.setItem('keys', JSON.stringify(keys));
+    })
+    .catch((error) => {
+      console.error(error); // Handle any errors if needed
+    });
+  const updatedDates = () => {
+    let finalArray = [];
+    const finalVersion = localStorage.getItem('keys');
+    let finalTimes = finalVersion.split(',');
+    // console.log(finalTimes);
+    let finalVersionOnDrugs = finalTimes.map((s) => s.replace(/"/g, ''));
+    // console.log(timeSlots);
+    let disabledDates = [];
+    for (let i = 0; i < finalVersionOnDrugs.length; i++) {
+      for (let j = 0; j < timeSlots.length; j++) {
+        // console.log(timeSlots)
+        // console.l
+        if (timeSlots[j] != finalVersionOnDrugs[i]) {
+          disabledDates.push(timeSlots[j]);
+        }
+      }
+    }
+    let uniqueDisabledDates = [...new Set(disabledDates)];
+    console.log(uniqueDisabledDates);
+
+    for (let i = 0; i < finalVersionOnDrugs.length; i++) {
+      if (finalVersionOnDrugs[i] === '') {
+        continue;
+      }
+      finalArray.push(
+        <button
+          key={finalVersionOnDrugs[i]}
+          onClick={() => handleTimeSelect(finalVersionOnDrugs[i])}
+          className={`time-slot ${
+            selectedTime === finalVersionOnDrugs[i] ? 'selected' : ''
+          } `}
+          disabled={false}
+        >
+          {finalVersionOnDrugs[i]}
+        </button>
+      );
+    }
+
+    return finalArray;
+  };
+  updatedDates();
 
   return (
     <div className="booking-calendar-container">
@@ -275,7 +315,7 @@ const Calendar = () => {
         Selected date:{' '}
         {selectedDate ? new Date(selectedDate).toDateString() : 'none'}
       </div> */}
-      <body>{generateTimeSlots()}</body>
+      <body>{updatedDates()}</body>
 
       <Link
         className="calendar-continue-link"
