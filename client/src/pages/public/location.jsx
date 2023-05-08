@@ -7,7 +7,7 @@ const Map = () => {
   useEffect(() => {
     let map;
     const loader = new Loader({
-      apiKey: 'AIzaSyB9w_68TwrwJAo7Ruo9S7N2ROKQpZRlhsg',
+      apiKey: '',
       version: 'weekly',
     });
 
