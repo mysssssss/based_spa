@@ -1,6 +1,5 @@
 .navbar-nav .nav-link {
   font-size: 1.5rem;
-  /* margin-left: 10px; */
 }
 
 .navbar {
@@ -17,22 +16,18 @@
 .navbar-nav {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: start;
   margin-left: auto;
 }
 
 #nav-link-special {
   background-color: #22abb8;
 
-  /* background-color: #00e9ff; */
   color: #fff;
-  /* padding: 15px 20px; */
   margin-right: 5px;
-  /* margin-left: 50px;  */
   margin-bottom: 5px;
   border-radius: 5px;
   font-weight: bold;
-  /* text-transform: uppercase; */
   transition: all 0.3s ease;
   text-align: center;
   width: 200px;
@@ -66,8 +61,17 @@
 }
 
 .navbar-brand img {
-  height: 120px;
-  width: 333.33px;
+  height: auto;
+  width: 50%;
   margin-right: auto;
   margin-left: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  .navbar-nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: auto;
+  }
 }

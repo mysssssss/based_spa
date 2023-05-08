@@ -1,25 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import frontTop from '../assets/spafront2.jpg';
-import giftCard from '../assets/giftCard.jpg';
-import spaMenu from '../assets/spaMenu.png';
-import reserveOnline from '../assets/reservingOnline.jpg';
-import onlineShopping from '../assets/onlineShopping.jpg';
-import spaFront from '../assets/spafront3.png';
-import googleReviews from '../assets/googleReviews.png';
-import yelpReviews from '../assets/yelpReviews.png';
+import giftCard from '../../assets/giftCard.jpg';
+import spaMenu from '../../assets/spaMenu.png';
+import reserveOnline from '../../assets/reservingOnline.jpg';
+import onlineShopping from '../../assets/onlineShopping.jpg';
+import spaFront from '../../assets/spafront3.png';
+import googleReviews from '../../assets/googleReviews.png';
+import yelpReviews from '../../assets/yelpReviews.png';
+import facebook from '../../assets/facebook.png';
+import instagram from '../../assets/instagram.png';
+
+import twitter from '../../assets/twitter.png';
+
+import emailImage from '../../assets/email.png';
+import spaBottom from '../../assets/spaBottom.jpg';
+
+import axios from 'redaxios';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    axios
+      .post('/api/v1/newsletter', {
+        name: name,
+        email: email,
+      })
+      .then(() => {
+        alert('Subscription successful!');
+        setName('');
+        setEmail('');
+      })
+      .catch((error) => {
+        console.error('Error sending subscription request:', error);
+      });
+  }
+
   return (
     <div>
-      <div className="imageAndReserve">
-        <img src={spaFront} alt="" className="mainFrontImage" />
-        <Link to="/booking_courses">
-          <button className="reserveButton">reserve now</button>
-        </Link>
+      <div className="topFront">
+        <div className="imageAndReserve">
+          <img src={spaFront} alt="" className="mainFrontImage" />
+        </div>
+        <div className="textOverFrontImage">
+          <Link to="/booking_courses">
+            <button className="reserveButton">reserve now</button>
+          </Link>
+        </div>
       </div>
       <div className="frontPageMenu">
         <div className="menuItem">
@@ -36,7 +69,7 @@ function Home() {
 
         <div className="menuItem">
           {' '}
-          <Link className="linkFrontPage" to="/shop">
+          <Link className="linkFrontPage" to="/products">
             <img src={giftCard} alt="" srcset="" />
             <h4>Gift Cards</h4>
             <p>
@@ -103,8 +136,13 @@ function Home() {
             Based Spa.
           </p>
           <div className="reputationImages">
-            <img src={googleReviews} alt="google reviews image" />
-            <img src={yelpReviews} alt="yelp reviews image" />
+            <Link to="https://www.google.com/">
+              {' '}
+              <img src={googleReviews} alt="google reviews image" />
+            </Link>
+            <Link to="https://www.yelp.com/">
+              <img src={yelpReviews} alt="yelp reviews image" />
+            </Link>
           </div>
 
           {/* <button>Read Reviews</button> */}
@@ -143,6 +181,8 @@ function Home() {
               type="name"
               // className="nameInput"
               margin="normal"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
             />
           </div>
           <TextField
@@ -151,10 +191,14 @@ function Home() {
             variant="outlined"
             type="email"
             margin="normal"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
             // className="emailInput"
           />
         </div>
-        <button type="submit">submit</button>
+        <button onClick={handleSubmit} type="submit">
+          submit
+        </button>
         {/* </form> */}
       </div>{' '}
       {/* </Box> */}
@@ -163,13 +207,14 @@ function Home() {
         <p>Mon-Fri: 10 AM - 7 PM</p>
         <p>Sat: 10 AM - 6 PM</p>
         <h4>Location</h4>
-        <p>5582 Wellesley Park Drive</p>
+        <p>7030 W Palmetto Park Rd, Boca Raton, FL 33433</p>
+      </div>
+      <div className="imageBottom">
+        <img src={spaBottom} alt="" />
       </div>
       <div className="frontGoalTwo">
-        <h4>
-          This is more than a spa massage or facial. Our spa treatments improve
-          quality of life.
-        </h4>
+        <h4>This is more than a spa massage or facial.</h4>
+        <h4>Our spa treatments improve quality of life.</h4>
         <p>
           Every day our clients come in seeking relief from daily stress. We
           love seeing the dramatic transformations of our clients when they
@@ -195,7 +240,103 @@ function Home() {
           choices, we can help bring you back to a place of balance.
         </p>
       </div>
-      <div className="frontFooter"></div>
+      <div className="frontFooter">
+        <div className="frontFooterLinks">
+          <h4 className="footerH4">useful pages</h4>
+          <Link to="/about" className="linkToUsefulPages">
+            <p>about us</p>
+          </Link>
+          <Link to="/location" className="linkToUsefulPages">
+            <p>our location</p>
+          </Link>
+          <Link to="/products" className="linkToUsefulPages">
+            <p>shop products</p>
+          </Link>
+          <Link to="/contact" className="linkToUsefulPages">
+            <p>contact</p>
+          </Link>
+          <Link to="/courses_description" className="linkToUsefulPages">
+            <p>view courses</p>
+          </Link>
+          <Link to="/booking_courses" className="linkToUsefulPages">
+            <p>book courses</p>
+          </Link>
+          <Link to="/careers" className="linkToUsefulPages">
+            <p>careers</p>
+          </Link>
+          <Link to="/privacy_policy" className="linkToUsefulPages">
+            <p>privacy policy</p>
+          </Link>
+        </div>
+        <div className="frontFooterCourseTypes">
+          <h4 className="footerH4">course menu</h4>
+
+          <Link className="linkToUsefulPages">
+            <p>massage</p>
+          </Link>
+          <Link className="linkToUsefulPages">
+            <p>facials</p>
+          </Link>
+          <Link className="linkToUsefulPages">
+            <p>body treatment</p>
+          </Link>
+          <Link className="linkToUsefulPages">
+            <p>sauna</p>
+          </Link>
+          <Link className="linkToUsefulPages">
+            <p>consulation</p>
+          </Link>
+          <Link className="linkToUsefulPages">
+            <p>packages</p>
+          </Link>
+        </div>
+        <div className="socialAndContact">
+          <div className="frontFooterSocial">
+            <h4>connect with us!</h4>
+            <Link
+              to="https://www.facebook.com/"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <img src={facebook} alt="facebook" />
+            </Link>
+            <Link
+              to="https://twitter.com/"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              {' '}
+              <img src={twitter} alt="twitter" />
+            </Link>
+            <Link
+              to="https://instagram.com/"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <img src={instagram} alt="instagram" />
+            </Link>
+            <Link
+              to="https://mail.google.com/"
+              style={{
+                textDecoration: 'none',
+              }}
+            >
+              <img src={emailImage} alt="email" />{' '}
+            </Link>
+          </div>
+          <div className="frontFooterContactInfo">
+            <h4>reach out here</h4>
+            <ul>
+              <li>267-916-8780</li>
+              <li>danila.2565@gmail.com</li>
+              <li>7030 W Palmetto Park Rd, Boca Raton, FL 33433</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       {/* // image & reserve
 
       // links to spa menu, contact, shop, gift cards

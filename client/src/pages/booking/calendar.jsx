@@ -1,6 +1,5 @@
 import React from 'react';
-import Calendar from '../../component/booking/calender';
-
+import Calendar from '../../component/booking/calendarv2';
 function BookingCalendar() {
   return <Calendar />;
 }

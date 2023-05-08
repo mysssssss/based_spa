@@ -3,9 +3,10 @@
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  background-color: white;
 }
 
-form {
+.addCourseForm {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +29,7 @@ label {
   border: 1px solid grey;
 }
 
-button[type='submit'] {
+.addCourseSubmit {
   margin-top: 20px;
   padding: 10px;
   border-radius: 5px;
@@ -37,6 +38,7 @@ button[type='submit'] {
   color: white;
   font-size: 16px;
   cursor: pointer;
+  margin-left: 35%;
 }
 
 .addCourseSubmit:hover {
@@ -62,6 +64,14 @@ button[type='submit'] {
   border-radius: 5px;
   border: none;
   margin-bottom: 10px;
+  outline: solid 2px rgb(150, 150, 150);
+}
+
+.form-group input:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+.form-group textarea:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .form-group input[type='file'] {
@@ -72,11 +82,13 @@ button[type='submit'] {
 /* styles for the form-container div */
 .form-container {
   width: 80%;
+  height: auto;
   margin: 0 auto;
   padding: 20px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  background-color: #f2f2f2;
+  border: 3px solid #ccc;
+  margin-top: 10px;
+  /* background-color: #f2f2f2; */
 }
 
 /* styles for the h2 heading */
@@ -93,13 +105,27 @@ button[type='submit'] {
   margin-bottom: 20px;
 }
 
+.dropdown {
+  color: black;
+  background-color: white;
+  height: 50px;
+  border-radius: 10px;
+  /* outline: solid 2px rgb(150, 150, 150); */
+}
+
+select:focus {
+  outline: none;
+}
+
 /* styles for screens smaller than 768px */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
   .form-container {
     width: 90%;
     margin-top: 30px;
   }
-
+  .addCourseSubmit {
+    width: 30%;
+  }
   form {
     width: 100%;
   }

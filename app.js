@@ -8,6 +8,7 @@ const port = process.env.PORT || 5000;
 const authRouter = require('./routes/auth');
 const courseRouter = require('./routes/courses');
 const bookingRouter = require('./routes/booking');
+const newsRouter = require('./routes/news');
 
 // connect DB
 const connectDB = require('./db/connect');
@@ -29,6 +30,7 @@ app.get('/', (req, res) => {
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/courses', courseRouter);
 app.use('/api/v1/booking', bookingRouter);
+app.use('/api/v1/newsletter', newsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

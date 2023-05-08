@@ -3,24 +3,29 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import $ from 'jquery';
 
-// routes
-import Home from './pages/home';
-import About from './pages/about';
-import Login from './pages/admin/login';
-import Register from './pages/admin/register';
+// public routes
+import Home from './pages/public/home';
+import About from './pages/public/about';
+import Map from './pages/public/location';
 
+// booking routes
 import BookingCalendar from './pages/booking/calendar';
 import Course from './pages/booking/course';
+import BookingForm from './pages/booking/booking_info';
+import ConfirmationPage from './pages/booking/confirmation';
+
+// admin routes
+import Login from './pages/admin/login';
+import Register from './pages/admin/register';
 import AdminHome from './pages/admin/admin_home';
 import AdminCourses from './pages/admin/courses';
 import Dashboard from './pages/admin/dashboard';
 import AddCourse from './pages/admin/admin_courses/addcourse';
 import ViewCourses from './pages/admin/admin_courses/view_update_courses';
-import BookingForm from './pages/booking/booking_info';
-import ConfirmationPage from './pages/booking/confirmation';
 import AdminViewBookings from './pages/admin/admin_bookings/view_all_bookings';
 import ViewSingle from './pages/admin/admin_bookings/viewSingle';
 import UpdateCourse from './pages/admin/admin_courses/update_course';
+
 // components
 import AdminNavbar from './component/nav/admin_navbar';
 import Footer from './component/footer/footer';
@@ -40,6 +45,7 @@ import './css/dashboard.css';
 import './css/admin-courses.css';
 import './css/confirmation.css';
 import './css/bookings.css';
+import './css/about.css';
 
 import 'bootstrap';
 function App() {
@@ -63,7 +69,15 @@ function App() {
             <>
               <Navbar />
               <About />
-              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/location"
+          element={
+            <>
+              <Navbar />
+              <Map />
             </>
           }
         />

@@ -1,0 +1,21 @@
+.containerAbout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.containerAbout h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.descriptionAbout {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.imageAbout {
+  width: 100%;
+  margin-top: 40px;
+}

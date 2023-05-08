@@ -98,7 +98,7 @@ function AddCourseForm() {
         <div className="form-group">
           <label htmlFor="courseType">Course Type:</label>
           <select
-            className="addInput"
+            className="dropdown"
             id="courseType"
             name="courseType"
             value={courseType}

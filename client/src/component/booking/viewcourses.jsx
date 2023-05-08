@@ -2,16 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'redaxios';
 import CourseImage from '../../assets/courses.png';
 import { Link } from 'react-router-dom';
-import Description from '../admin_courses/description';
 
 function CourseList() {
   const [courses, setCourses] = useState([]);
+
   const massagesRef = useRef(null);
   const facialsRef = useRef(null);
   const bodyRef = useRef(null);
   const saunaRef = useRef(null);
   const packagesRef = useRef(null);
   const consultationRef = useRef(null);
+  const [showDescriptions, setShowDescriptions] = useState(false);
 
   useEffect(() => {
     axios.get('/api/v1/courses').then((response) => {
@@ -32,7 +33,19 @@ function CourseList() {
       setCourses(sortedCourses);
     });
   }, []);
+  const handleShortenDescription = (description, maxLength) => {
+    if (description.length <= maxLength) {
+      return description;
+    } else {
+      return `${description.slice(0, maxLength)}...`;
+    }
+  };
 
+  const [expandedCourse, setExpandedCourse] = useState(null);
+
+  const handleExpandDescription = (courseId) => {
+    setExpandedCourse(courseId);
+  };
   return (
     <div>
       <div>
@@ -118,8 +131,26 @@ function CourseList() {
                       </div>
                       <div className="imgDescription">
                         <p className="courseDescription">
-                          {course.description}
-                        </p>{' '}
+                          {expandedCourse === course._id ? (
+                            <p>{course.description}</p>
+                          ) : (
+                            <p>
+                              {handleShortenDescription(
+                                course.description,
+                                100
+                              )}
+                              <Link
+                                onClick={() =>
+                                  handleExpandDescription(course._id)
+                                }
+                                className="readMoreLink"
+                              >
+                                Read More
+                              </Link>
+                            </p>
+                          )}{' '}
+                        </p>
+
                         <img src={CourseImage} alt="" className="courseImg" />
                       </div>
                       <Link

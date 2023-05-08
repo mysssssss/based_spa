@@ -49,7 +49,7 @@ function AdminNavbar() {
                 login
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link
                 className="nav-link"
                 to="/admin/register"
@@ -57,7 +57,7 @@ function AdminNavbar() {
               >
                 register
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link
                 className="nav-link"

@@ -9,6 +9,8 @@ function BookingInfo() {
   const [formError, setFormError] = useState('');
   const [specialRequest, setSpecialRequest] = useState('');
   const navigate = useNavigate();
+  const selectedDateTime = localStorage.getItem('selectedDateTime');
+  // console.log(selectedDateTime);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,18 +22,23 @@ function BookingInfo() {
       return;
     }
     const courseId = localStorage.getItem('courseId');
-    const selectedDateTime = localStorage.getItem('selectedDateTime');
     const courseType = localStorage.getItem('courseType');
+
+    // function formatSelectedDateTime(selectedDateTime) {
     function formatSelectedDateTime(selectedDateTime) {
       const { date, time } = JSON.parse(selectedDateTime);
-      const formattedDate = new Date(date).toLocaleDateString(undefined, {
-        month: 'numeric',
-        day: 'numeric',
-      });
-      const formattedTime = time;
-      return `${formattedDate}, ${formattedTime}`;
+      const formattedDate = date + ',' + time;
+      console.log(formattedDate);
     }
-    const formattedSelectedDateTime = formatSelectedDateTime(selectedDateTime);
+    formatSelectedDateTime(selectedDateTime);
+    // const formattedDate = new Date(date).toLocaleDateString(undefined, {
+    // month: 'numeric',
+    // day: 'numeric',
+    // });
+    // const formattedTime = time;
+    // return `${formattedDate}, ${formattedTime}`;
+    // }
+    // const formattedSelectedDateTime = formatSelectedDateTime(selectedDateTime);
     // handle form submission here
     localStorage.setItem('name', name);
     localStorage.setItem('email', email);
@@ -41,7 +48,7 @@ function BookingInfo() {
       phone: phone,
       specialRequest: specialRequest,
       courseType: courseType,
-      selectedDateTime: formattedSelectedDateTime,
+      selectedDateTime: selectedDateTime,
       courseId: courseId,
     };
     console.log(sendData);
@@ -52,7 +59,7 @@ function BookingInfo() {
         phone: phone,
         specialRequest: specialRequest,
         courseType: courseType,
-        selectedDateTime: formattedSelectedDateTime,
+        selectedDateTime: selectedDateTime,
         courseId: courseId,
       })
       .then(() => {

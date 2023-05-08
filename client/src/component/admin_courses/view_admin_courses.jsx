@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'redaxios';
 import CourseImage from '../../assets/courses.png';
 import { Link } from 'react-router-dom';
-import Description from '../admin_courses/description';
 
 function CourseList() {
   const [courses, setCourses] = useState([]);

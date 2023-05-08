@@ -40,6 +40,7 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease-in-out;
   margin-right: 20px;
+  border-radius: 10px;
 }
 
 .dashboard-container-one:hover {
@@ -48,6 +49,8 @@
 }
 .dashboard-container-two {
   padding: 3rem;
+  border-radius: 10px;
+
   outline: 2px rgba(0, 0, 0, 0.527) solid;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease-in-out;
